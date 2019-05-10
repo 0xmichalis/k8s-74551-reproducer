@@ -54,10 +54,12 @@ func main() {
 			if (random % 5) == 0 {
 				method = http.MethodGet
 			}
+			logLine := fmt.Sprintf("Sending request %s", method)
 			if method == http.MethodPost {
 				data = bytes.Repeat([]byte("r"), random)
+				logLine += fmt.Sprintf(" with size %d", random)
 			}
-			log.Printf("Sending request %s with size %d", method, random)
+			log.Print(logLine)
 			if err := doRequest(client, method, data); err != nil {
 				log.Print(err)
 			}
